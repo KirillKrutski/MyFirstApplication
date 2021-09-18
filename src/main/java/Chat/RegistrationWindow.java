@@ -1,16 +1,29 @@
 package Chat;
+import lombok.SneakyThrows;
+import Server.MyServer;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.*;
-import java.awt.FlowLayout;
+import java.net.Socket;
 
-public class RegistrationWindow extends JFrame implements ActionListener , Client{
+
+public class RegistrationWindow extends JFrame implements ActionListener , Client, Runnable{
+
+    private Server.MyServer MyServer;
+    private Socket socket;
+
+
     JTextField loginText, passwordText;
     JLabel panelPassword, panelLogin;
     JButton buttonConnect;
+
+    public RegistrationWindow(Socket socket, Server.MyServer server) {
+        this.socket = socket;
+        this.MyServer = server;
+    }
+
+
     public void startRegistration() {
 
         buttonConnect = new JButton("connect");
@@ -30,7 +43,7 @@ public class RegistrationWindow extends JFrame implements ActionListener , Clien
         buttonConnect.setFocusable(false);
 
         // Поле с паролем
-        passwordText = new JTextField();
+        passwordText = new JTextField(15);
         passwordText.setBounds(100,50,165,25);
 
         // Создание панели с текстовыми полями
@@ -43,7 +56,7 @@ public class RegistrationWindow extends JFrame implements ActionListener , Clien
         setContentPane(contents);
 
         // Определяем размер окна и выводим его на экран
-        setSize(350 , 200);
+        setSize(250 , 150);
         setVisible(true);
 
     }
@@ -52,17 +65,20 @@ public class RegistrationWindow extends JFrame implements ActionListener , Clien
     @Override
     public void login() {
         String login = loginText.getText();
-        System.out.println(login);
     }
 
     @Override
     public void password() {
         String password = passwordText.getText();
-        System.out.println(password);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    @Override
+    public void run() {
 
     }
 }

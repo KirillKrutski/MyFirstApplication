@@ -1,11 +1,20 @@
 package Chat;
 
+
+import Server.MyServer;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.Socket;
+
 
 public class ServiceStartImpl extends RegistrationWindow implements ServiceStart , ActionListener {
+
+    public ServiceStartImpl(Socket socket, MyServer server){
+        super(socket, server);
+    }
+
     @Override
     public void start() {
 
@@ -34,4 +43,5 @@ public class ServiceStartImpl extends RegistrationWindow implements ServiceStart
     public void actionPerformed(ActionEvent actionEvent) {
         startRegistration();
     }
+
 }
